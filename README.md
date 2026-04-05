@@ -123,19 +123,67 @@ Testing window sizes from 100 to 300 words showed that 200 words gave the best b
 ## 📁 Repository Structure
 
 ```
-├── BookA_test.csv                          # Shuffled pages for Book A
-├── BookB_test.csv                          # Shuffled pages for Book B
-├── Mysterious_Affair_at_Styles_Train_Data.csv  # Training data (correct order)
-├── sample_submission.csv                   # Submission format reference
-├── solve.py                                # v1 — TF-IDF baseline
-├── solve_v2.py                             # v2 — Best submission (0.5470)
-├── solve_v4.py                             # v4 — XGBoost approach
-├── solve_v5.py                             # v5 — Beam search
-├── solve_v8.py                             # v8 — Ensemble approach
-├── solve_v11.py                            # v11 — Rich linguistic features
-├── BookA.csv                               # Final submission for Book A
-├── BookB.csv                               # Final submission for Book B
-└── README.md                               # This file
+Archivist-Puzzle/
+│
+├── Codes/                                      # All solution scripts
+│   ├── solve.py                                # v1  — TF-IDF baseline
+│   ├── solve_v2.py                             # v2  — Best submission (0.5470) ⭐
+│   ├── solve_v3.py                             # v3  — Large mpnet model
+│   ├── solve_v4.py                             # v4  — XGBoost approach
+│   ├── solve_v5.py                             # v5  — Beam search ordering
+│   ├── solve_v6.py                             # v6  — All starts + 2-opt
+│   ├── solve_v7.py                             # v7  — Cross-encoder rescoring
+│   ├── solve_v8.py                             # v8  — Ensemble of 5 window sizes
+│   ├── solve_v9.py                             # v9  — multi-qa model
+│   ├── solve_v10.py                            # v10 — gte-small model
+│   ├── solve_v11.py                            # v11 — Rich linguistic features
+│   ├── solve_v12.py                            # v12 — n=150 window experiment
+│   ├── solve_v13.py                            # v13 — n=100 window experiment
+│   ├── solve_final.py                          # Final combined attempt
+│   ├── test_models.py                          # Model comparison script
+│   ├── diagnose.py                             # Window size diagnostic
+│   ├── analyze.py                              # Top-5 accuracy analysis
+│   ├── compare.py                              # Model vs ensemble comparison
+│   ├── check.py                                # Data inspection script
+│   ├── check_diff.py                           # Submission diff checker
+│   └── check_v2.py                             # Submission v2 recreation
+│
+├── Files/                                      # All data and submission files
+│   │
+│   ├── # ── Input Data ──────────────────────────────
+│   ├── BookA_test.csv                          # Shuffled pages — Book A (147 pages)
+│   ├── BookB_test.csv                          # Shuffled pages — Book B (57 pages)
+│   ├── Mysterious_Affair_at_Styles_Train_Data.csv  # Training data (correct order)
+│   ├── sample_submission.csv                   # Submission format reference
+│   │
+│   ├── # ── Final Submissions ───────────────────────
+│   ├── BookA.csv                               # Final submission — Book A ⭐
+│   ├── BookB.csv                               # Final submission — Book B ⭐
+│   │
+│   ├── # ── All Submission Versions ─────────────────
+│   ├── BookA_v6.csv                            # Book A — submission v6
+│   ├── BookA_v7.csv                            # Book A — submission v7
+│   ├── BookA_v8.csv                            # Book A — submission v8
+│   ├── BookA_v9.csv                            # Book A — submission v9
+│   ├── BookA_v10.csv                           # Book A — submission v10
+│   ├── BookA_v11.csv                           # Book A — submission v11
+│   ├── BookA_v12.csv                           # Book A — submission v12
+│   ├── BookA_v13.csv                           # Book A — submission v13
+│   ├── BookA_recreation.csv                    # Book A — v2 recreation attempt
+│   ├── BookA_v2_recreation.csv                 # Book A — v2 recreation backup
+│   ├── BookB_v6.csv                            # Book B — submission v6
+│   ├── BookB_v7.csv                            # Book B — submission v7
+│   ├── BookB_v8.csv                            # Book B — submission v8
+│   ├── BookB_v9.csv                            # Book B — submission v9
+│   ├── BookB_v10.csv                           # Book B — submission v10
+│   ├── BookB_v11.csv                           # Book B — submission v11
+│   ├── BookB_v12.csv                           # Book B — submission v12
+│   ├── BookB_v13.csv                           # Book B — submission v13
+│   ├── BookB_recreation.csv                    # Book B — v2 recreation attempt
+│   └── BookB_v2_recreation.csv                 # Book B — v2 recreation backup
+│
+├── LICENSE                                     # MIT License
+└── README.md                                   # This file
 ```
 
 ---
@@ -144,12 +192,23 @@ Testing window sizes from 100 to 300 words showed that 200 words gave the best b
 
 ### Install dependencies
 ```bash
-pip install pandas numpy scikit-learn sentence-transformers
+pip install pandas numpy scikit-learn sentence-transformers xgboost
+```
+
+### Clone the repository
+```bash
+git clone https://github.com/aditi23garg/Archivist-Puzzle.git
+cd Archivist-Puzzle
+```
+
+### Copy data files to working directory
+```bash
+cp Files/*.csv .
 ```
 
 ### Run best solution
 ```bash
-python solve_v2.py
+python Codes/solve_v2.py
 ```
 
 This will generate `BookA.csv` and `BookB.csv` ready for submission.
